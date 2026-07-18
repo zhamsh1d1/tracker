@@ -4,12 +4,12 @@ import { format } from 'date-fns';
 import { isToday, getIsoDay } from '../utils/dateUtils';
 
 interface DailyStatsProps {
-  daysInMonth: Date[];
+  daysInPeriod: Date[];
   habits: Habit[];
   habitData: HabitData;
 }
 
-export const DailyStats: React.FC<DailyStatsProps> = ({ daysInMonth, habits, habitData }) => {
+export const DailyStats: React.FC<DailyStatsProps> = ({ daysInPeriod, habits, habitData }) => {
 
   return (
     <div className="daily-stats-wrapper glass-panel">
@@ -17,7 +17,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ daysInMonth, habits, hab
         <tbody>
           <tr className="stats-row highlighted">
             <td className="sticky-col stat-label">Прогресс дня в %</td>
-            {daysInMonth.map((day) => {
+            {daysInPeriod.map((day) => {
               const dateString = format(day, 'yyyy-MM-dd');
               const isoDay = getIsoDay(day);
               let doneFraction = 0;
@@ -45,7 +45,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ daysInMonth, habits, hab
           </tr>
           <tr className="stats-row">
             <td className="sticky-col stat-label">Выполнено за день</td>
-            {daysInMonth.map((day) => {
+            {daysInPeriod.map((day) => {
               const dateString = format(day, 'yyyy-MM-dd');
               const isoDay = getIsoDay(day);
               let doneCount = 0;
@@ -70,7 +70,7 @@ export const DailyStats: React.FC<DailyStatsProps> = ({ daysInMonth, habits, hab
           </tr>
           <tr className="stats-row">
             <td className="sticky-col stat-label">Не выполнено за день</td>
-            {daysInMonth.map((day) => {
+            {daysInPeriod.map((day) => {
               const dateString = format(day, 'yyyy-MM-dd');
               const isoDay = getIsoDay(day);
               let doneCount = 0;

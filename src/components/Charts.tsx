@@ -13,13 +13,13 @@ import {
 } from 'recharts';
 
 interface ChartsProps {
-  daysInMonth: Date[];
+  daysInPeriod: Date[];
   habits: Habit[];
   habitData: HabitData;
 }
 
-export const Charts: React.FC<ChartsProps> = ({ daysInMonth, habits, habitData }) => {
-  const data = daysInMonth.map((day) => {
+export const Charts: React.FC<ChartsProps> = ({ daysInPeriod, habits, habitData }) => {
+  const data = daysInPeriod.map((day) => {
     const dateString = format(day, 'yyyy-MM-dd');
     const isoDay = getIsoDay(day);
     let doneFraction = 0;

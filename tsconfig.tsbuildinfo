@@ -1,1 +1,1 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/types.ts","./src/components/Charts.tsx","./src/components/DailyStats.tsx","./src/components/HabitsGrid.tsx","./src/components/Header.tsx","./src/components/MonthlyStats.tsx","./src/utils/dateUtils.ts"],"errors":true,"version":"5.9.3"}
+{"root":["./src/App.tsx","./src/main.tsx","./src/types.ts","./src/components/Charts.tsx","./src/components/DailyStats.tsx","./src/components/HabitsGrid.tsx","./src/components/Header.tsx","./src/components/WeeklyStats.tsx","./src/utils/dateUtils.ts"],"version":"5.9.3"}

@@ -1,25 +1,35 @@
 import React from 'react';
-import { getMonthName } from '../utils/dateUtils';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface HeaderProps {
   currentDate: Date;
-  onChangeMonth: (amount: number) => void;
+  onPrevPeriod: () => void;
+  onNextPeriod: () => void;
   goal: string;
   onChangeGoal: (goal: string) => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentDate, onChangeMonth, goal, onChangeGoal }) => {
+export const Header: React.FC<HeaderProps> = ({ 
+  currentDate, 
+  onPrevPeriod, 
+  onNextPeriod, 
+  goal, 
+  onChangeGoal 
+}) => {
+  const monthName = format(currentDate, 'LLLL yyyy', { locale: ru });
+  const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+  const weekStart = format(currentDate, 'd MMM', { locale: ru });
+
   return (
-    <div className="app-header glass-panel">
+    <div className="header-glass glass-panel">
       <div className="month-selector">
-        <button className="icon-button" onClick={() => onChangeMonth(-1)}>
+        <button className="icon-btn" onClick={onPrevPeriod}>
           <ChevronLeft size={24} />
         </button>
-        <h2 className="month-name">
-          {getMonthName(currentDate)} {currentDate.getFullYear()}
-        </h2>
-        <button className="icon-button" onClick={() => onChangeMonth(1)}>
+        <h2>{capitalizedMonth} ({weekStart})</h2>
+        <button className="icon-btn" onClick={onNextPeriod}>
           <ChevronRight size={24} />
         </button>
       </div>

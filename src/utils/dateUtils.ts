@@ -1,4 +1,4 @@
-import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDay, isSameDay } from 'date-fns';
+import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDay, isSameDay, startOfWeek, endOfWeek } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
 export const getDaysInMonth = (date: Date) => {
@@ -42,6 +42,12 @@ export const getWeeks = (daysInMonth: Date[]) => {
 
 export const isToday = (date: Date) => {
   return isSameDay(date, new Date());
+};
+
+export const getDaysInWeek = (date: Date) => {
+  const start = startOfWeek(date, { weekStartsOn: 1 });
+  const end = endOfWeek(date, { weekStartsOn: 1 });
+  return eachDayOfInterval({ start, end });
 };
 
 export const getIsoDay = (date: Date) => {

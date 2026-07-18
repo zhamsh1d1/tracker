@@ -3,7 +3,7 @@ export interface Habit {
   name: string;
   icon?: string;
   color?: string;
-  targetPerMonth?: number;
+  targetPerWeek?: number;
   daysOfWeek?: number[]; // Array of 1-7 where 1 is Monday, 7 is Sunday. Undefined means every day.
   type?: 'boolean' | 'counter';
   maxCount?: number;
@@ -16,7 +16,7 @@ export interface HabitData {
 }
 
 export interface AppState {
-  currentMonth: string; // ISO string for the first day of the month
+  currentDate: string; // ISO string for the currently viewed date
   goalOfMonth: string;
   habits: Habit[];
   habitData: HabitData;

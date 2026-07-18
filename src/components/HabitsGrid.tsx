@@ -1,11 +1,12 @@
 import React from 'react';
 import { Habit, HabitData } from '../types';
-import { getWeeks, formatDay, formatDayOfWeek, isToday, getIsoDay } from '../utils/dateUtils';
+import { isToday, getIsoDay } from '../utils/dateUtils';
 import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 import { Plus, Trash2 } from 'lucide-react';
 
 interface HabitsGridProps {
-  daysInMonth: Date[];
+  daysInPeriod: Date[];
   habits: Habit[];
   habitData: HabitData;
   onToggleHabit: (habitId: string, dateString: string) => void;
@@ -19,7 +20,7 @@ interface HabitsGridProps {
 const DAY_NAMES = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
 export const HabitsGrid: React.FC<HabitsGridProps> = ({
-  daysInMonth,
+  daysInPeriod,
   habits,
   habitData,
   onToggleHabit,
@@ -29,37 +30,25 @@ export const HabitsGrid: React.FC<HabitsGridProps> = ({
   onUpdateHabit,
   onToggleDayOfWeek,
 }) => {
-  const weeks = getWeeks(daysInMonth);
-
   return (
-    <div className="grid-wrapper glass-panel">
-      <div className="grid-scroll-container">
-        <table className="habits-table">
-          <thead>
-            <tr>
-              <th className="sticky-col habit-header-cell">
-                <div className="habit-header-content">
-                  Ежедневные привычки
-                </div>
+    <div className="grid-container glass-panel">
+      <table className="habits-table">
+        <thead>
+          <tr>
+            <th className="sticky-col">
+              <div className="habit-header-title">Ежедневные привычки</div>
+              <div className="habit-header-subtitle">Название привычки</div>
+            </th>
+            {daysInPeriod.map((day) => (
+              <th key={format(day, 'yyyy-MM-dd')} className={isToday(day) ? 'today-header' : ''}>
+                <div className="day-name">{format(day, 'EEEEEE', { locale: ru }).toUpperCase()}</div>
+                <div className="day-number">{format(day, 'd')}</div>
               </th>
-              {weeks.map((week) => (
-                <th key={week.weekNumber} colSpan={week.days.length} className="week-header">
-                  Неделя {week.weekNumber}
-                </th>
-              ))}
-            </tr>
-            <tr>
-              <th className="sticky-col sub-header">Название привычки</th>
-              {daysInMonth.map((day) => (
-                <th key={day.toISOString()} className={`day-header ${isToday(day) ? 'today' : ''}`}>
-                  <div className="day-name">{formatDayOfWeek(day)}</div>
-                  <div className="day-number">{formatDay(day)}</div>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {habits.map((habit) => (
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {habits.map((habit) => (
               <tr key={habit.id}>
                 <td className="sticky-col habit-name-cell">
                   <div className="habit-name-input-wrapper">
@@ -92,7 +81,7 @@ export const HabitsGrid: React.FC<HabitsGridProps> = ({
                     </button>
                   </div>
                 </td>
-                {daysInMonth.map((day) => {
+                {daysInPeriod.map((day) => {
                   const dateString = format(day, 'yyyy-MM-dd');
                   const recordVal = habitData[habit.id]?.[dateString] || false;
                   const isChecked = Boolean(recordVal);
@@ -138,11 +127,10 @@ export const HabitsGrid: React.FC<HabitsGridProps> = ({
                   <Plus size={16} /> Добавить привычку
                 </button>
               </td>
-              <td colSpan={daysInMonth.length} className="empty-footer-cell"></td>
+              <td colSpan={daysInPeriod.length} className="empty-footer-cell"></td>
             </tr>
           </tfoot>
         </table>
-      </div>
     </div>
   );
 };

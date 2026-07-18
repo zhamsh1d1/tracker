@@ -436,6 +436,42 @@
   padding: 8px 0;
 }
 
+/* Weekly Stats */
+.weekly-stats-wrapper {
+  flex: 1;
+  padding: 1.5rem;
+  min-width: 300px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-table-container {
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.weekly-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.weekly-stats-table th {
+  text-align: center;
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.weekly-stats-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /* Monthly Stats */
 .monthly-stats-wrapper {
   display: flex;
