@@ -1,6 +1,7 @@
 import React from 'react';
 import { Habit, HabitData } from '../types';
 import { format } from 'date-fns';
+import { getIsoDay } from '../utils/dateUtils';
 
 interface MonthlyStatsProps {
   daysInMonth: Date[];

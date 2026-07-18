@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { Header } from './components/Header';
 import { HabitsGrid } from './components/HabitsGrid';
@@ -7,7 +7,7 @@ import { MonthlyStats } from './components/MonthlyStats';
 import { Charts } from './components/Charts';
 import { AppState, Habit, HabitData } from './types';
 import { getDaysInMonth } from './utils/dateUtils';
-import { addMonths, subMonths, format, parseISO } from 'date-fns';
+import { addMonths, subMonths } from 'date-fns';
 
 const LOCAL_STORAGE_KEY = 'habitTrackerState';
 
