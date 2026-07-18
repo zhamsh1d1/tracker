@@ -122,21 +122,15 @@
 }
 
 /* Table Grid Styles */
-.grid-wrapper {
-  padding: 0;
-  overflow: hidden;
-}
-
-.grid-scroll-container {
-  width: 100%;
+.grid-container {
   overflow-x: auto;
-  padding: 24px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .habits-table {
   border-collapse: collapse;
   width: 100%;
-  min-width: 1000px;
+  min-width: 600px; /* Reduced from 1000px so it fits better */
 }
 
 .habits-table th, .habits-table td {
@@ -560,12 +554,79 @@
   height: 250px;
 }
 
-@media (max-width: 1024px) {
-  .tracker-layout {
+@media (max-width: 768px) {
+  .app-container {
+    padding: 10px;
+  }
+  
+  .content-wrapper {
+    gap: 16px;
+  }
+  
+  .header-glass {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+  
+  .month-selector {
+    justify-content: center;
+  }
+  
+  .month-selector h2 {
+    font-size: 18px;
+  }
+  
+  .goal-input-container {
+    min-width: 100%;
+  }
+  
+  .sticky-col {
+    min-width: 140px;
+    font-size: 12px;
+    padding: 0 8px;
+  }
+  
+  .habit-name-input {
+    font-size: 12px;
+  }
+  
+  .habit-header-content, .habit-header-title, .habit-header-subtitle {
+    font-size: 12px;
+  }
+  
+  .day-toggle-btn {
+    padding: 1px 2px;
+    font-size: 9px;
+  }
+  
+  .bottom-content {
     flex-direction: column;
   }
-  .left-column, .right-column {
+  
+  .charts-wrapper {
     width: 100%;
-    min-width: unset;
+  }
+  
+  .weekly-stats-wrapper {
+    width: 100%;
+    min-width: 100%;
+    padding: 1rem;
+  }
+  
+  .daily-stats-wrapper {
+    padding: 16px;
+    overflow-x: auto;
+  }
+  
+  .stats-table {
+    min-width: 600px;
+  }
+  
+  .header-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
   }
 }

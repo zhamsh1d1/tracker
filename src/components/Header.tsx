@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Download, Upload } from 'lucide-react';
 
 interface HeaderProps {
   currentDate: Date;
@@ -9,6 +9,8 @@ interface HeaderProps {
   onNextPeriod: () => void;
   goal: string;
   onChangeGoal: (goal: string) => void;
+  onExport: () => void;
+  onImport: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ 
@@ -16,7 +18,9 @@ export const Header: React.FC<HeaderProps> = ({
   onPrevPeriod, 
   onNextPeriod, 
   goal, 
-  onChangeGoal 
+  onChangeGoal,
+  onExport,
+  onImport
 }) => {
   const monthName = format(currentDate, 'LLLL yyyy', { locale: ru });
   const capitalizedMonth = monthName.charAt(0).toUpperCase() + monthName.slice(1);
@@ -43,6 +47,14 @@ export const Header: React.FC<HeaderProps> = ({
           value={goal}
           onChange={(e) => onChangeGoal(e.target.value)}
         />
+      </div>
+      <div className="header-actions">
+        <button className="icon-btn" onClick={onImport} title="Импорт данных">
+          <Upload size={20} />
+        </button>
+        <button className="icon-btn" onClick={onExport} title="Экспорт данных">
+          <Download size={20} />
+        </button>
       </div>
     </div>
   );

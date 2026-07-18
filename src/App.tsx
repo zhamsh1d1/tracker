@@ -121,6 +121,32 @@ function App() {
     });
   };
 
+  const handleExport = () => {
+    const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (data) {
+      navigator.clipboard.writeText(data).then(() => {
+        alert('Данные скопированы в буфер обмена! Теперь вы можете отправить их на свой телефон или сохранить.');
+      }).catch(() => {
+        prompt('Не удалось автоматически скопировать. Скопируйте данные вручную:', data);
+      });
+    } else {
+      alert('Нет данных для экспорта.');
+    }
+  };
+
+  const handleImport = () => {
+    const data = prompt('Вставьте скопированные данные сюда:');
+    if (data) {
+      try {
+        JSON.parse(data);
+        localStorage.setItem(LOCAL_STORAGE_KEY, data);
+        window.location.reload();
+      } catch (e) {
+        alert('Ошибка импорта! Неверный формат данных.');
+      }
+    }
+  };
+
   const daysInPeriod = getDaysInWeek(new Date(currentDate));
 
   if (!isLoaded) return null;
@@ -134,6 +160,8 @@ function App() {
           onNextPeriod={handleNextPeriod}
           goal={goalOfMonth}
           onChangeGoal={setGoalOfMonth}
+          onExport={handleExport}
+          onImport={handleImport}
         />
         
         <div className="main-content">
